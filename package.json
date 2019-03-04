@@ -6,8 +6,8 @@
   "scripts": {
     "start": "babel-node index.js",
     "heroku-postbuild": "npm install",
-    "start:dev": "nodemon --exec babel-node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "nodemon --exec babel-node ./api/test.js",
+    "test": "mocha --require @babel/register"
   },
   "repository": {
     "type": "git",
