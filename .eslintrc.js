@@ -4,7 +4,6 @@ module.exports = {
     "linebreak-style": 0
   },
   "env": {
-    "commonjs": true,
     "node": true,
     "mocha": true
   },
