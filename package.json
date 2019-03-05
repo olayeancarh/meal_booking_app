@@ -7,7 +7,8 @@
     "start": "babel-node index.js",
     "heroku-postbuild": "npm install",
     "start:dev": "nodemon --exec babel-node ./api/test.js",
-    "test": "mocha --require @babel/register"
+    "test": "mocha --require @babel/register",
+    "cover": "babel-node node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec test/*"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/olayeancarh/meal_booking_app#readme",
   "dependencies": {
+    "babel-istanbul": "^0.12.2",
     "babel-loader": "^7.1.5",
     "body-parser": "^1.18.3",
     "express": "^4.16.4"
@@ -34,9 +36,11 @@
     "@babel/preset-env": "^7.3.4",
     "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
+    "coveralls": "^3.0.3",
     "eslint": "^5.15.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
+    "istanbul": "^0.4.5",
     "mocha": "^6.0.2",
     "nodemon": "^1.18.10"
   },
