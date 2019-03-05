@@ -19,9 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     createdBy: {
       type: DataTypes.INTEGER,
-      allowNull: {
-        args: false,
-        msg: 'Please enter a userId',
+      references: {
+        model: 'User',
+        key: 'id',
+        as: 'userId',
       },
     },
   }, {});

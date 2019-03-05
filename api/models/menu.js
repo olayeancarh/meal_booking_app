@@ -2,9 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Menu = sequelize.define('Menu', {
     createdBy: {
       type: DataTypes.INTEGER,
-      allowNull: {
-        args: false,
-        msg: 'Please enter a userId',
+      references: {
+        model: 'User',
+        key: 'id',
+        as: 'userId',
       },
     },
     mealId: {
@@ -12,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: {
         args: false,
         msg: 'Please enter meal id',
+      },
+      references: {
+        model: 'Meal',
+        key: 'id',
+        as: 'mealId',
       },
     },
   }, {});
