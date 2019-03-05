@@ -1,11 +1,8 @@
 language: node_js
 node_js:
-  - stable
-install:
-  - npm install
-
-script:
-  - npm run cover
-
-# Send coverage data to Coveralls
-after_script: "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
+after_success:
+  npm run coverage
