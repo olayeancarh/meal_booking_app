@@ -1,23 +1,28 @@
+import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
-import db from './api/config/database';
+import logger from 'morgan';
 
 const app = express();
 
+const hostname = '127.0.0.1';
+
 const port = process.env.PORT || 8001;
 
-// Database connection
-db.authenticate()
-  .then(() => console.log('Database connected...'))
-  .catch(error => console.log(`Error: ${error}`));
+const server = http.createServer(app);
+
+app.use(logger('dev'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-  res.send('The API is working, CHI!!!');
-});
+// Users routes(app);
+require('./api/routes/user')(app);
 
-app.listen(port, () => {
-  console.log(`Server is running at PORT ${port}`);
+app.get('*', (req, res) => res.status(200).send({
+  message: 'Welcome to the food app',
+}));
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
