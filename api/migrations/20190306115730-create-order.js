@@ -17,6 +17,16 @@ module.exports = {
           as: 'userId',
         },
       },
+      menuId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Menus',
+          key: 'id',
+          as: 'menuId',
+        },
+      },
       deliveryPoint: {
         allowNull: false,
         type: Sequelize.STRING,

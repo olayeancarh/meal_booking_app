@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
           as: 'userId',
         },
       },
+      menuId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Menu',
+          key: 'id',
+          as: 'menuId',
+        },
+      },
       deliveryPoint: {
         type: DataTypes.STRING,
         allowNull: {
@@ -22,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Order.belongsTo(models.User, {
       foreignKey: 'userId',
+      onDelete: 'CASCADE',
+    });
+    Order.belongsTo(models.Menu, {
+      foreignKey: 'menuId',
       onDelete: 'CASCADE',
     });
   };
