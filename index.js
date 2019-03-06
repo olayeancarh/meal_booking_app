@@ -19,6 +19,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Users routes(app);
 require('./api/routes/user')(app);
 
+// Meals routes(app);
+require('./api/routes/meal')(app);
+
+// Menus routes(app);
+require('./api/routes/menu')(app);
+
+// Orders routes(app);
+require('./api/routes/order')(app);
+
 app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to the food app',
 }));
