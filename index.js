@@ -35,3 +35,5 @@ app.get('*', (req, res) => res.status(200).send({
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+module.exports = app;
