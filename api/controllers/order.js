@@ -5,10 +5,10 @@ const { Order } = model;
 class Orders {
   static addAOrder(req, res) {
     const {
-      name, image, price, userId,
+      userId, menuId, deliveryPoint,
     } = req.body;
     return Order.create({
-      name, image, price, userId,
+      userId, menuId, deliveryPoint,
     })
       .then(orderData => res.status(201).send({ success: true, message: 'Order successfully created', orderData }));
   }
@@ -20,23 +20,21 @@ class Orders {
 
   static updateAOrder(req, res) {
     const {
-      name, image, price, userId,
+      userId, menuId, deliveryPoint,
     } = req.body;
     return Order.findByPk(req.params.orderId)
       .then((order) => {
         order.update({
-          name: name || order.name,
-          image: image || order.image,
-          price: price || order.price,
+          deliveryPoint: deliveryPoint || order.deliveryPoint,
+          menuId: menuId || order.menuId,
           userId: userId || order.userId,
         })
           .then((updatedOrder) => {
             res.status(200).send({
               message: 'Order updated successfuly',
               data: {
-                name: name || updatedOrder.name,
-                image: image || updatedOrder.image,
-                price: price || updatedOrder.price,
+                deliveryPoint: deliveryPoint || updatedOrder.deliveryPoint,
+                menuId: menuId || updatedOrder.menuId,
                 userId: userId || updatedOrder.userId,
               },
             });
