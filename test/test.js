@@ -40,11 +40,11 @@ describe('Meals', () => {
 
   // Test to update meal
   it('should update meal', (done) => {
-    const id = 4;
+    const id = 12 || 13;
     const meal = {
       name: 'Potato Pottage',
       userId: 1,
-      price: 5500,
+      price: 500,
       image: 'potatofood.jpg',
     };
     chai.request(app)
@@ -64,7 +64,7 @@ describe('Meals', () => {
 
   // Test to delete meal
   it('should delete meal', (done) => {
-    const id = 4;
+    const id = 12 || 13;
     chai.request(app)
       .delete(`/api/v1/meals/delete/${id}`)
       .end((err, res) => {
@@ -136,7 +136,7 @@ describe('Orders', () => {
 
   // Test to update order
   it('should update order', (done) => {
-    const id = 2;
+    const id = 3 || 4;
     const order = {
       userId: 1,
       menuId: 1,
