@@ -11,7 +11,7 @@ module.exports = (app) => {
   // Api route to login
   app.post('/api/v1/users/login', Users.login);
   // Api route to create a new user
-  app.post('/api/v1/users', middleware.checkToken, Users.signUp);
+  app.post('/api/v1/users', Users.signUp);
   // Api route to get all users in the system
   app.get('/api/v1/users', middleware.checkToken, Users.fetchAllUsers);
   // Api route to edit a user
