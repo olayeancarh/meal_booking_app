@@ -1,6 +1,10 @@
+import jwt from 'jsonwebtoken';
 import model from '../models';
+import config from '../config';
+
 
 const { User } = model;
+
 class Users {
   static signUp(req, res) {
     const {
@@ -60,6 +64,39 @@ class Users {
           .catch(error => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));
+  }
+
+  static login(req, res) {
+    const {
+      email, password,
+    } = req.body;
+
+    User.findOne({ where: { email } })
+      .then((user) => {
+        if (!user) {
+          res.status(404).json({
+            message: 'Authentication failed',
+          });
+        } else if (!user.validPassword(password)) {
+          res.status(404).json({
+            message: 'Login failed',
+          });
+        } else {
+          // const token = jwt.sign({ email }, config.secret, {
+          //   expiresIn: '300m',
+          // });
+          jwt.sign({ email }, config.secret, (err, token) => {
+            res.json({
+              token,
+            });
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({
+          message: `There was an error! ${error}`,
+        });
+      });
   }
 }
 
