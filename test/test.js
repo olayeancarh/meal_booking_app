@@ -60,7 +60,7 @@ describe('Meals', () => {
 
   // Test to delete meal
   it('should delete meal', (done) => {
-    const id = 13;
+    const id = 10;
     chai.request(app)
       .delete(`/api/v1/meals/delete/${id}`)
       .end((err, res) => {
