@@ -7,7 +7,7 @@
     "start": "babel-node index.js",
     "heroku-postbuild": "npm install",
     "start:dev": "nodemon --exec babel-node ./api/test.js",
-    "test": "nyc --require @babel/register _mocha test/test.js --exit",
+    "test": "nyc --require @babel/register _mocha test/test.js --timeout 15000 --exit",
     "coverage": "cross-env NODE_ENV=test nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
