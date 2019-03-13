@@ -15,7 +15,7 @@ describe('Meals', () => {
       .get('/api/v1/meals')
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.be.a('array');
+        res.body.should.be.a('object');
         done();
       });
   });
@@ -23,16 +23,16 @@ describe('Meals', () => {
   // Test to add a single meal
   it('should add a meal', (done) => {
     const meal = {
-      name: 'Ewa Agoin and Garri',
+      name: 'Bread and Akara',
       userId: 1,
-      price: 550,
+      price: 500,
       image: 'beansfood.jpg',
     };
     chai.request(app)
       .post('/api/v1/meals')
       .send(meal)
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(200);
         res.body.should.be.a('object');
         done();
       });
@@ -54,17 +54,13 @@ describe('Meals', () => {
         res.should.have.status(200);
         res.body.should.be.a('object');
         res.body.should.have.property('message');
-        res.body.should.have.property('data');
-        res.body.data.should.have.property('name');
-        res.body.data.should.have.property('userId');
-        res.body.data.should.have.property('price');
         done();
       });
   });
 
   // Test to delete meal
   it('should delete meal', (done) => {
-    const id = 4;
+    const id = 13;
     chai.request(app)
       .delete(`/api/v1/meals/delete/${id}`)
       .end((err, res) => {
@@ -83,7 +79,7 @@ describe('Menus', () => {
       .get('/api/v1/menus')
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.be.a('array');
+        res.body.should.be.a('object');
         done();
       });
   });
@@ -98,7 +94,7 @@ describe('Menus', () => {
       .post('/api/v1/menus')
       .send(menu)
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(200);
         res.body.should.be.a('object');
         done();
       });
@@ -112,7 +108,7 @@ describe('Orders', () => {
       .get('/api/v1/orders')
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.be.a('array');
+        res.body.should.be.a('object');
         done();
       });
   });
@@ -128,7 +124,7 @@ describe('Orders', () => {
       .post('/api/v1/orders')
       .send(order)
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(200);
         res.body.should.be.a('object');
         done();
       });
