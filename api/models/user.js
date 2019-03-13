@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt';
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstName: {
@@ -46,7 +48,24 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     role: DataTypes.STRING,
-  }, {});
+  }, {
+    hooks: {
+      beforeCreate: (user) => {
+        const salt = bcrypt.genSaltSync();
+        this.user.password = bcrypt.hashSync(user.password, salt);
+      },
+    },
+    instanceMethods: {
+      validPassword(password) {
+        return bcrypt.compareSync(password, this.password);
+      },
+    },
+  });
+
+  // Adding an instance level methods.
+  User.prototype.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+  };
   User.associate = (models) => {
     // associations can be defined here
   };
